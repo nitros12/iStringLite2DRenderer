@@ -33,8 +33,9 @@ namespace iStringLite_2DRenderer
         private readonly string name;
         private readonly string hostName;
         private readonly int port;
-        
-        private byte[] packetBuffer;
+
+        public byte[] DataBuffer { get; set; }
+        public byte[] PacketBuffer { get; set; }
         private UdpClient udpClient;
         public ArrayList LightPoints { get; }
 
@@ -47,6 +48,7 @@ namespace iStringLite_2DRenderer
             this.port = port;
             this.udpClient = udpClient;
             this.LightPoints = new ArrayList();
+            this.DataBuffer = new byte[240];
         }
 
         public LightPoint addLightPoint(byte id, double x, double y, double z)
@@ -70,38 +72,40 @@ namespace iStringLite_2DRenderer
             if (Array.IndexOf(VALID_COMMANDS, command) == -1)
                 return;
             
-            packetBuffer = new byte[data.Length + 6]; // packet buffer at sie of data + 6 header bytes
+            PacketBuffer = new byte[data.Length + 6]; // packet buffer at sie of data + 6 header bytes
 
-            byte lengthHigh = 0;
-            byte lengthLow = (byte) packetBuffer.Length;
+            // splits length into two bytes
+            byte[] length = BitConverter.GetBytes(PacketBuffer.Length);
+            byte lengthHigh = length[1];
+            byte lengthLow = length[0];
 
             byte checksum = 0x00; // empty checksum
             
             // set bytes in packet buffer
-            packetBuffer[0] = (byte) controlElementID;
-            packetBuffer[1] = (byte) lightingElementID;
-            packetBuffer[2] = lengthHigh;
-            packetBuffer[3] = lengthLow;
-            packetBuffer[4] = command;
-            packetBuffer[5] = checksum;
+            PacketBuffer[0] = (byte) controlElementID;
+            PacketBuffer[1] = (byte) lightingElementID;
+            PacketBuffer[2] = lengthHigh;
+            PacketBuffer[3] = lengthLow;
+            PacketBuffer[4] = command;
+            PacketBuffer[5] = checksum;
 
             // set packet data field
             for (int x = 0; x < data.Length; x++)
             {
-                packetBuffer[6 + x] = data[x]; // starts after the header bytes (6)
+                PacketBuffer[6 + x] = data[x]; // starts after the header bytes (6)
             }
 
 
             // calculate checksum
-            for (int x = 0; x < packetBuffer.Length; x++)
+            for (int x = 0; x < PacketBuffer.Length; x++)
             {
-                checksum += packetBuffer[x];
+                checksum += PacketBuffer[x];
             }
 
-            packetBuffer[5] = checksum; // set checksum header
+            PacketBuffer[5] = checksum; // set checksum header
 
             // send packet
-            udpClient.Send(packetBuffer, packetBuffer.Length, hostName, port);
+            udpClient.Send(PacketBuffer, PacketBuffer.Length, hostName, port);
 
             //Console.WriteLine("Sending command {4} to {0}:{1} addressing controller {2} light {3}", hostName, port, controlElementID, lightingElementID, command);
         }

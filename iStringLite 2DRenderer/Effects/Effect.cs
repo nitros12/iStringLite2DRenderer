@@ -1,18 +1,18 @@
-﻿namespace iStringLite_2DRenderer
+﻿using System;
+
+namespace iStringLite_2DRenderer
 {
     public abstract class Effect
     {
-        protected VideoBuffer videoBuffer;
-        
-        public Effect(ref VideoBuffer videoBuffer)
+        public Effect()
         {
-            this.videoBuffer = videoBuffer;
+            Console.WriteLine("Loaded {0} Effect", this.GetType().Name);
         }
         
         /// <summary>
         /// Updates the VideoBuffer with the Effect's pixel values.
         /// </summary>
-        public abstract void update();
+        public abstract void update(ref VideoBuffer videoBuffer);
         
         /// <summary>
         /// Resets the Effect to its original state

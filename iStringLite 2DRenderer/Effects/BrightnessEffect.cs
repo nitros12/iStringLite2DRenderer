@@ -8,12 +8,12 @@ namespace iStringLite_2DRenderer
     {
         public double Brightness { set; get; }
 
-        public BrightnessEffect(ref VideoBuffer videoBuffer, double brightness) : base(ref videoBuffer)
+        public BrightnessEffect(double brightness)
         {
             this.Brightness = brightness;
         }
 
-        public override void update()
+        public override void update(ref VideoBuffer videoBuffer)
         {
             for (int y = 0; y < videoBuffer.Height; y++)
             {
@@ -43,6 +43,15 @@ namespace iStringLite_2DRenderer
             }
         }
         
+        /// <summary>
+        /// Converts RGB into HLS format for use in dimming the luminence
+        /// </summary>
+        /// <param name="r">Red pixel value</param>
+        /// <param name="g">Green pixel value</param>
+        /// <param name="b">Blue pixel value</param>
+        /// <param name="h">Hue pixel value output</param>
+        /// <param name="l">Luminence pixel value output</param>
+        /// <param name="s">Saturation pixel value output</param>
         public static void RgbToHls(int r, int g, int b, out double h, out double l, out double s) {
             // Convert RGB to a 0.0 to 1.0 range.
             double double_r = r / 255.0;
@@ -83,6 +92,15 @@ namespace iStringLite_2DRenderer
             }
         }
         
+        /// <summary>
+        /// Converts HSL into RGB format
+        /// </summary>
+        /// <param name="h">Hue pixel value</param>
+        /// <param name="l">Luminence pixel value</param>
+        /// <param name="s">Saturation pixel value</param>
+        /// <param name="r">Red pixel value output</param>
+        /// <param name="g">Green pixel value output</param>
+        /// <param name="b">Blue pixel value output</param>
         public static void HlsToRgb(double h, double l, double s, out int r, out int g, out int b)
         {
             double p2;
@@ -110,6 +128,13 @@ namespace iStringLite_2DRenderer
             b = (int)(double_b * 255.0);
         }
         
+        /// <summary>
+        /// Converts QQH to RGB
+        /// </summary>
+        /// <param name="q1"></param>
+        /// <param name="q2"></param>
+        /// <param name="hue"></param>
+        /// <returns></returns>
         private static double QqhToRgb(double q1, double q2, double hue)
         {
             if (hue > 360) hue -= 360;

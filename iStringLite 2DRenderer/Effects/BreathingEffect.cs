@@ -8,26 +8,28 @@ namespace iStringLite_2DRenderer
         
         private double minBrightness;
         private double maxBrightness;
-        private double increments = 0.001;
+        private double increments;
+        private int incrementDelayMilis;
         
-        public BreathingEffect(ref VideoBuffer videoBuffer, double minBrightnes, double maxBrightness, double increments) : base(ref videoBuffer, minBrightnes)
+        public BreathingEffect(double minBrightness, double maxBrightness, double increments, int incrementDelayMillis) : base(minBrightness)
         {
-            this.minBrightness = minBrightnes;
+            this.minBrightness = minBrightness;
             this.maxBrightness = maxBrightness;
             this.increments = increments;
+            this.incrementDelayMilis = incrementDelayMillis;
         }
 
-        public override void update()
+        public override void update(ref VideoBuffer videoBuffer)
         {
-            base.update();
+            base.update(ref videoBuffer);
             
             Brightness += increments; // increases/decreases brightness by the incremental amount
 
             // if the brightness hits the min or max, the increment is negated
             if (Brightness <= minBrightness || Brightness >= maxBrightness)
                 increments = -increments;
-
-            Thread.Sleep(10); // small pause?
+            
+            Thread.Sleep(incrementDelayMilis);
         }
     }
 }

@@ -11,16 +11,20 @@ namespace iStringLite_2DRenderer
         public XDocument SceneFile { get; set; }
         public Router[] Routers { get; set; }
         public UdpClient UdpClient { get; set; }
-
+        
+        public int videoBufferWidth { get; set; }
+        public int videoBufferHeight { get; set; }
 
         public const string SCENE_ELEMENT = "Scene";
         public const string CONTROLLER_ELEMENT = "FixedIPService";
         public const string LIGHT_ELEMENT = "Light";
 
-        public Scene(string sceneFileLocation, UdpClient udpClient)
+        public Scene(string sceneFileLocation, UdpClient udpClient, int videoBufferWidth, int videoBufferHeight)
         {
             this.SceneFileLocation = sceneFileLocation;
             this.UdpClient = udpClient;
+            this.videoBufferWidth = videoBufferWidth;
+            this.videoBufferHeight = videoBufferHeight;
             this.LoadScene();
             this.countComponents();
         }
@@ -85,7 +89,7 @@ namespace iStringLite_2DRenderer
 
                     // add new LightPopint to controller
                     LightPoint lightPoint = controller.addLightPoint(lightId, x, y, z);
-                    lightPoint.CaluclateProjectedCoordinates(minX, maxX, minY, maxY); // calculate the projected coordinates given the min and max of each
+                    lightPoint.CaluclateProjectedCoordinates(minX, maxX, minY, maxY, videoBufferWidth, videoBufferHeight); // calculate the projected coordinates given the min and max of each
                     lightCounter++;
                 }
                 

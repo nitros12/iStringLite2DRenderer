@@ -5,16 +5,17 @@
     <e p="C:\Users\admin\RiderProjects\iStringLite 2DRenderer" t="IncludeFlat">
       <e p="iStringLite 2DRenderer" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Board.xml" t="Include" />
         <e p="Controller.cs" t="Include" />
         <e p="Effects" t="Include">
           <e p="BitmapEffect.cs" t="Include" />
           <e p="BreathingEffect.cs" t="Include" />
           <e p="BrightnessEffect.cs" t="Include" />
-          <e p="Effect2D.cs" t="Include" />
+          <e p="Effect.cs" t="Include" />
+          <e p="RandomiseEffect.cs" t="Include" />
         </e>
-        <e p="heart.bmp" t="Include" />
-        <e p="InfoLab.xml" t="Include" />
+        <e p="Images" t="Include">
+          <e p="heart.bmp" t="Include" />
+        </e>
         <e p="iStringLite 2DRenderer.csproj" t="IncludeRecursive" />
         <e p="LightPoint.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
@@ -27,7 +28,12 @@
         <e p="Renderer.cs" t="Include" />
         <e p="Router.cs" t="Include" />
         <e p="Scene.cs" t="Include" />
-        <e p="Scene.xml" t="Include" />
+        <e p="Scenes" t="Include">
+          <e p="Board.xml" t="Include" />
+          <e p="InfoLab.xml" t="Include" />
+          <e p="InfoLabSection.xml" t="Include" />
+          <e p="Scene.xml" t="Include" />
+        </e>
         <e p="VideoBuffer.cs" t="Include" />
       </e>
       <e p="iStringLite 2DRenderer.sln" t="IncludeFlat" />
