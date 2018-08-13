@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Timers;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer.Effects
 {
     public class RandomiseEffect : Effect
     {
@@ -28,10 +27,10 @@ namespace iStringLite_2DRenderer
                     int b = Random.Next(255);
 
                     // bit shift the RGB values into one int
-                    int rgb = r << 8 | g;
-                    rgb = rgb << 8 | b;
+                    int rgb = b << 8 | g;
+                    rgb = rgb << 8 | r;
 
-                    videoBuffer.Buffer[y, x] = (uint) rgb; // set the VideoBuffer value at x, y to the randomised RGB value
+                    videoBuffer.setPixel(x, y, (uint) rgb); // set the VideoBuffer value at x, y to the randomised RGB value
                 }
             }
 

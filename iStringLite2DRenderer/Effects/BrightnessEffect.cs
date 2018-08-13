@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Drawing;
-using System.Threading;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer.Effects
 {
     public class BrightnessEffect : Effect
     {
@@ -19,9 +17,9 @@ namespace iStringLite_2DRenderer
             {
                 for (int x = 0; x < videoBuffer.Width; x++)
                 {
-                    int r = BitConverter.GetBytes(videoBuffer.Buffer[y, x])[0];
-                    int g = BitConverter.GetBytes(videoBuffer.Buffer[y, x])[1];
-                    int b = BitConverter.GetBytes(videoBuffer.Buffer[y, x])[2];
+                    int r = BitConverter.GetBytes(videoBuffer.getPixel(x, y))[0];
+                    int g = BitConverter.GetBytes(videoBuffer.getPixel(x, y))[1];
+                    int b = BitConverter.GetBytes(videoBuffer.getPixel(x, y))[2];
 
                     //Color color = Color.FromArgb(r, g, b);
                     //TODO: replace all this for ControlPaint.Light/ControlPaint.Darken using System.Drawing.Color instead
@@ -33,15 +31,15 @@ namespace iStringLite_2DRenderer
                     RgbToHls(r, g, b, out h, out l, out s);
                     
                     //TODO: This is a quick way to get around transparency. Need a better way.
-                    if(videoBuffer.Buffer[y, x] != 0x000000)
+                    if(videoBuffer.getPixel(x, y) != 0x000000)
                         l = Brightness;
                     
                     HlsToRgb(h, l, s, out r, out g, out b);
                     
-                    int rgb = r << 8 | g;
-                    rgb = rgb << 8 | b;
+                    int rgb = b << 8 | g;
+                    rgb = rgb << 8 | r;
 
-                    videoBuffer.Buffer[y, x] = (uint) rgb;
+                    videoBuffer.setPixel(x, y, (uint) rgb);
                 }
             }
         }

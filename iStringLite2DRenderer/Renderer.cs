@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
-using iStringLite2DRenderer;
-using iStringLite_Stuff.Effects;
+using System.Threading;
+using iStringLite2DRenderer.Effects;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer
 {
     /// <summary>
     /// TODO: This probably needs to be longer than the others, so fill this in when you have time.
     /// </summary>
     public class Renderer
     {
-        public static readonly int FPS = 10;    // Frames per second to be rendered
+        public static readonly int FPS = 24;    // Frames per second to be rendered
         
         private Scene Scene;                    // loaded from an XML file using the iStringLite Scene format
         private List<Effect> Effects;           // a list of Effects to be rendered to the LEDs
@@ -22,8 +22,9 @@ namespace iStringLite_2DRenderer
 
         public static void Main(string[] args)
         {
-            Renderer renderer = new Renderer("Scenes/InfoLabSection.xml", 20, 80);
+            Renderer renderer = new Renderer("Scenes/Board.xml");
             renderer.Render();
+
             /*Color color = Color.FromArgb(255, 0, 0);
             Console.WriteLine(color);
             color = ControlPaint.Dark(color, .1f);
@@ -32,7 +33,7 @@ namespace iStringLite_2DRenderer
             Console.WriteLine(color);*/
         }
         
-        public Renderer(string sceneFileLocation, int width, int height)
+        public Renderer(string sceneFileLocation)
         {
             this.UdpClient = new UdpClient();
             this.Scene = new Scene(sceneFileLocation, UdpClient);
@@ -42,10 +43,14 @@ namespace iStringLite_2DRenderer
             this.Effects = new List<Effect>();
 
             //TODO: Used for testing. This will load automatically
-            AddEffect(new BitmapEffect("Images/heart.bmp", 0, 0, 40, 160));
+
+            //AddEffect(new FillEffect(0, 0, 0));
+            //AddEffect(new AnimatedGifEffect("Images/vaporwave.gif", 0, 0, VideoBuffer)); //, true, VideoBuffer));
+            //AddEffect(new MovingTextureEffect("Images/water.png", -100, -100, 100, 100)); //, true, VideoBuffer));
             //AddEffect(new RandomiseEffect(10));
+            AddEffect(new ScrollingFillEffect(255, 0, 0, 10));
             //AddEffect(new BreathingEffect(0.001, 0.5, 0.001, 10));
-            //AddEffect(new BrightnessEffect(0.7));
+            AddEffect(new BrightnessEffect(0.01));
         }
         
         /// <summary>
@@ -67,6 +72,7 @@ namespace iStringLite_2DRenderer
             foreach (Effect effect in Effects)
             {
                 effect.update(ref VideoBuffer);
+                //Console.WriteLine("Rendering {0}", effect.GetType().Name);
             }
         }
 
@@ -92,6 +98,7 @@ namespace iStringLite_2DRenderer
                     }
                     bufferOffset = 0;
                     r.sendCommand(c.Id, 255, 0x0C, c.DataBuffer); // sends the data buffer with the command 0x0C (24-bit command)
+                    Thread.Sleep(1);
                 }
             }
         }
@@ -106,15 +113,13 @@ namespace iStringLite_2DRenderer
             int frame = 1;
             while (true)
             {
-                UpdateVideoBuffer();
-                
                 if (Timer.ElapsedMilliseconds <= 1000 / FPS) continue; // skip while loop if not ready to update
-                
+                UpdateVideoBuffer();
                 UpdateLightPoints();
                 Timer.Restart();
                 
                 //Console.WriteLine("FRAME {0}/{1}", frame, FPS);
-
+                
                 // frame counter for dubugging
                 if (frame == FPS)
                     frame = 1;

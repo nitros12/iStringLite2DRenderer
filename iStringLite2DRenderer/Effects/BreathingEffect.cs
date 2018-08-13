@@ -1,11 +1,7 @@
-﻿using System;
-using System.Threading;
-
-namespace iStringLite_2DRenderer
+﻿namespace iStringLite2DRenderer.Effects
 {
     public class BreathingEffect : BrightnessEffect
     {
-        
         private double MinBrightness;
         private double MaxBrightness;
         private double Increments;

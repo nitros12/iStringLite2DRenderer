@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer.Effects
 {
     /// <summary>
     /// An abstract Effect class that holds all the core Effect information and provides methods used for randering new Effects.
@@ -71,6 +71,7 @@ namespace iStringLite_2DRenderer
         /// <returns>Whether or not the interval has been reached</returns>
         public Boolean intervalReached()
         {
+            //TODO: restart the timer if true instead of using reset() override to do it
             return Timer.ElapsedMilliseconds >= Interval;
         }
 

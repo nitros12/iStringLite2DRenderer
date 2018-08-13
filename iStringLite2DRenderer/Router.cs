@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Net.Sockets;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer
 {
     /// <summary>
     /// A Router class which contains all connection details and references to the Controllers attached.
@@ -19,7 +19,7 @@ namespace iStringLite_2DRenderer
             //0x07, // Command_Update_8bitGreyscale
             //0x08, // Command_Update_16bit		
             0x0C, // Command_Update_24bit
-            //0x10, // Command_SetColour		
+            0x10, // Command_SetColour		
             //0x13, // Command_Reset			
             //0x14, // Command_DynamicReaddress	
             //0x15, // Command_SetDeviceType		
@@ -89,9 +89,9 @@ namespace iStringLite_2DRenderer
         public void sendCommand(int controlElementID, int lightingElementID, byte command, byte[] data)
         {
             // return if controller ID is invalid
-            if (controlElementID < 0 || controlElementID > 255 || controlElementID >= Controllers.Count)
+            if (controlElementID < 0 || controlElementID > 255 || controlElementID > Controllers.Count)
                 return;
-
+            
             // return if lighting ID is invalid
             if (lightingElementID < 0 || lightingElementID > 255)
                 return;

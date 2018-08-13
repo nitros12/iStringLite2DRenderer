@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Xml;
 using System.Xml.Linq;
-using iStringLite_2DRenderer;
 
 namespace iStringLite2DRenderer
 {
@@ -23,7 +22,7 @@ namespace iStringLite2DRenderer
         private double MinY { get; set; }                            // min Y of scene
         private double MaxY { get; set; }                            // max Y of scene
 
-        private const int VIDEO_BUFFER_RESOLUTION = 2;               // the multiplier of the video buffer resolution
+        private const int VIDEO_BUFFER_RESOLUTION = 1;               // the multiplier of the video buffer resolution
         public const string SCENE_ELEMENT = "Scene";                // XML tag for a Scene
         private const string CONTROLLER_ELEMENT = "FixedIPService";  // XML tag for a Router
         private const string LIGHT_ELEMENT = "Light";                // XML tag for a LightPoint
@@ -32,6 +31,7 @@ namespace iStringLite2DRenderer
         {
             this.SceneFileLocation = sceneFileLocation;
             this.UdpClient = udpClient;
+            this.Routers = new Router[0];
             
             this.LoadScene(SceneFileLocation);
             this.countComponents();
@@ -60,9 +60,10 @@ namespace iStringLite2DRenderer
                 MinY = routers.Descendants(ns + LIGHT_ELEMENT).Min(e => (double) e.Attribute("y"));
                 MaxY = routers.Descendants(ns + LIGHT_ELEMENT).Max(e => (double) e.Attribute("y"));
 
-                VideoBufferWidth = (int) MaxX * VIDEO_BUFFER_RESOLUTION; //TODO: Fix the 2x videobuffer resolution
-                VideoBufferHeight = (int) MaxY * VIDEO_BUFFER_RESOLUTION;
+                VideoBufferWidth = (int) MaxX * VIDEO_BUFFER_RESOLUTION + 1; //TODO: Fix the 2x videobuffer resolution
+                VideoBufferHeight = (int) MaxY * VIDEO_BUFFER_RESOLUTION + 1;
 
+                Console.WriteLine("VBW: {0}, VBH: {1}, maxX: {2}, maxY: {3}", VideoBufferWidth, VideoBufferHeight, MaxX, MaxY);
 
                 Console.WriteLine("Namespace: {0}", ns);
                 Console.WriteLine("Loading {0} Controllers", routers.Count());
@@ -120,6 +121,7 @@ namespace iStringLite2DRenderer
             }
             catch (Exception e)
             {
+                //TODO: Throw a SceneFileError Exception to end program when an invalid scene was passed
                 Console.WriteLine("Error loading Scene file at {0}", sceneFileLocation);
             }
         }

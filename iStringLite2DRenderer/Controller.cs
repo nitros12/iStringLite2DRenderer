@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Net.Sockets;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer
 {
     /// <summary>
     /// A Controller class which contains connection details, the details of the Controller (i.e. ID), and
@@ -14,9 +13,10 @@ namespace iStringLite_2DRenderer
         public static readonly int DATA_BUFFER_SIZE = 240; // the size of the data buffer (80leds * 3colours = 240bytes)
 
         public int Id { get; }
-        public readonly string Name;                 // name of the Router (e.g. MK_ROUTER_1._firefly._udp.local)
-        public readonly string HostName;             // ip of the Router (e.g. 169.254.1.1)
-        public readonly int Port;                    // port of the Router (e.g. 0xCAFE / 51966)
+        public string Name { get; }
+        public string HostName { get; }
+        public int Port { get; }
+        public UdpClient UdpClient { get; }
 
         public byte[] DataBuffer { get; set; }        // a buffer used to store the data to be sent in a command
         public byte[] PacketBuffer { get; set; }      // a buffer used to create the packet to be sent to the controller
@@ -30,8 +30,9 @@ namespace iStringLite_2DRenderer
             this.Name = name;
             this.HostName = hostName;
             this.Port = port;
+            this.UdpClient = udpClient;
             
-            this.DataBuffer = new byte[240];
+            this.DataBuffer = new byte[DATA_BUFFER_SIZE];
             
             this.LightPoints = new ArrayList();
         }

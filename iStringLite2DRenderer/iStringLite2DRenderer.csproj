@@ -43,11 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="Effects\AnimatedGifEffect.cs" />
     <Compile Include="Effects\BitmapEffect.cs" />
     <Compile Include="Effects\BreathingEffect.cs" />
     <Compile Include="Effects\BrightnessEffect.cs" />
     <Compile Include="Effects\Effect.cs" />
+    <Compile Include="Effects\FillEffect.cs" />
+    <Compile Include="Effects\MovingTextureEffect.cs" />
     <Compile Include="Effects\RandomiseEffect.cs" />
+    <Compile Include="Effects\ScrollingFillEffect.cs" />
     <Compile Include="Effects\WaterEffect.cs" />
     <Compile Include="LightPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

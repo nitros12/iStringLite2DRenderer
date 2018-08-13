@@ -1,4 +1,4 @@
-﻿namespace iStringLite_2DRenderer
+﻿namespace iStringLite2DRenderer.Effects
 {
     public class WaterEffect : Effect
     {

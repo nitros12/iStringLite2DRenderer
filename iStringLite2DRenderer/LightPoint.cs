@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace iStringLite_2DRenderer
+namespace iStringLite2DRenderer
 {
     /// <summary>
     /// A LightPoint class which contains LightPoint data such as the LED ID, X, Y and Z positions,
@@ -42,6 +42,9 @@ namespace iStringLite_2DRenderer
             Px = (int) Map(X, minX, maxX, 0, videoBufferWidth - 1);
             Py = (int) Map(Y, minY, maxY, 0, videoBufferHeight - 1);
             Pz = 0; //TODO: Future versions may wish to implement the Z axis
+            
+            //TODO: This calculation still seems to need some work for flawless scaling
+            //Console.WriteLine("Px: {0}, Py: {1}, X: {2}, Y: {3}, {4}", Px, Py, X, Y, Px != X || Py != Y ? "FALSE" : "TRUE");
         }
         
         /// <summary>

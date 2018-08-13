@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Drawing;
-using iStringLite_2DRenderer;
+using System.Drawing.Imaging;
 
-namespace iStringLite_Stuff.Effects
+namespace iStringLite2DRenderer.Effects
 {
     public class BitmapEffect : Effect
     {
-	    private readonly Bitmap _image;
-        private int _positionX;
-        private int _positionY;
-
-        private bool _fullscreen;
+	    protected Bitmap _image;
+        protected int _positionX;
+        protected int _positionY;
 
         /// <summary>
         /// Used when creating a fullscreen, scaled bitmap that fills the entire VideoBuffer.
@@ -18,10 +16,17 @@ namespace iStringLite_Stuff.Effects
         /// <param name="imageLocation">Location of the image to be rendered</param>
         public BitmapEffect(string imageLocation)
         {
-            this._image = new Bitmap(imageLocation);
-            this._positionX = 0;
-            this._positionY = 0;
-            this._fullscreen = false;
+            try
+            {
+                this._image = new Bitmap(imageLocation);
+                this._positionX = 0;
+                this._positionY = 0;
+            }
+            catch (Exception e)
+            {
+                //TODO: Throw a BitMapEffectInvalidLocation Exception to end program when an invalid scene was passed
+                Console.WriteLine("Image could not be loaded from {0}", imageLocation);
+            }
         }
 
         /// <summary>
@@ -32,10 +37,16 @@ namespace iStringLite_Stuff.Effects
         /// <param name="positionY">The Y position to start rendering the image from</param>
         public BitmapEffect(string imageLocation, int positionX, int positionY)
         {
-            this._image = new Bitmap(imageLocation);
-            this._positionX = positionX;
-            this._positionY = positionY;
-            this._fullscreen = false;
+            try
+            {
+                this._image = new Bitmap(imageLocation);
+                this._positionX = positionX;
+                this._positionY = positionY;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Image could not be loaded from {0}", imageLocation);
+            }
         }
 
         /// <inheritdoc />
@@ -45,19 +56,24 @@ namespace iStringLite_Stuff.Effects
         /// <param name="imageLocation">Location of the image to be rendered</param>
         /// <param name="positionX">The X position to start rendering the image from</param>
         /// <param name="positionY">The Y position to start rendering the image from</param>
-        /// <param name="fullscreen">Whether or not the image is scaled to fit the VideoBuffer dimensions</param>
-        /// <param name="videoBuffer">VideoBuffer to be used for scaling if fullscreen is true, can be null otherwise</param>
-        public BitmapEffect(string imageLocation, int positionX, int positionY, bool fullscreen, VideoBuffer videoBuffer)
+        /// <param name="videoBuffer">VideoBuffer to be used for scaling the image to</param>
+        public BitmapEffect(string imageLocation, int positionX, int positionY, VideoBuffer videoBuffer)
         {
-            this._image = new Bitmap(imageLocation);
-            this._positionX = positionX;
-            this._positionY = positionY;
-            this._fullscreen = fullscreen;
-
-            if (fullscreen && videoBuffer != null)
+            try
             {
-                this._image = new Bitmap(_image, new Size(videoBuffer.Width, videoBuffer.Height)); // resize the image to the video buffer
-                //TODO: if fullscreen and vbuffer is null, throw exception?
+                this._image = new Bitmap(imageLocation);
+                this._positionX = positionX;
+                this._positionY = positionY;
+    
+                if (videoBuffer != null)
+                {
+                    this._image = new Bitmap(_image, new Size(videoBuffer.Width, videoBuffer.Height)); // resize the image to the video buffer
+                    //TODO: if fullscreen and vbuffer is null, throw exception?
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Image could not be loaded from {0}", imageLocation);
             }
         }
 
@@ -72,36 +88,44 @@ namespace iStringLite_Stuff.Effects
         /// <param name="height">The height of the image to be rendered</param>
         public BitmapEffect(string imageLocation, int positionX, int positionY, int width, int height)
         {
-	        this._image = new Bitmap(imageLocation);
-            this._image = new Bitmap(_image, new Size(width, height)); // resize the image
-            
-            this._positionX = positionX;
-            this._positionY = positionY;
-            _fullscreen = false;
+            try
+            {
+                this._image = new Bitmap(imageLocation);
+                this._image = new Bitmap(_image, new Size(width, height)); // resize the image
+
+                this._positionX = positionX;
+                this._positionY = positionY;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Image could not be loaded from {0}", imageLocation);
+            }
         }
         
         public override void update(ref VideoBuffer videoBuffer)
         {
             try
             {
-                // loops through image and copied it into the buffer
-                for (int y = _positionY; y < _image.Height; y++)
+                /*// loops through image and copied it into the buffer
+                for (int y = _positionY; y < _image.Height + _positionY; y++)
                 {
-                    for (int x = _positionX; x < _image.Width; x++)
+                    for (int x = _positionX; x < _image.Width + _positionY; x++)
                     {
-                        videoBuffer.Buffer[y, x] = colorToRGB(_image.GetPixel(x, y));
-                    }
-                }
-                
-                /*// loops through video buffer and 
-                for (int y = 0; y < videoBuffer.Buffer.GetLength(0); y++)
-                {
-                    for (int x = 0; x < videoBuffer.Buffer.GetLength(1); x++)
-                    {
-                        videoBuffer.Buffer[y, x] = colorToRGB(_image.GetPixel(x, y));
-                        //Console.WriteLine("R: {0}, G: {1}, B: {2} RGB: {3}", image.GetPixel(x, y).R, image.GetPixel(x, y).G, image.GetPixel(x, y).B, colorToRGB(image.GetPixel(x, y)));
+                        if(x >= 0 && y >= 0 && x < videoBuffer.Width && y < videoBuffer.Height)
+                            videoBuffer.Buffer[y, x] = colorToRGB(_image.GetPixel(x, y));
                     }
                 }*/
+                
+                
+                // loops through video buffer and 
+                for (int y = 0; y < videoBuffer.Height; y++)
+                {
+                    for (int x = 0; x < videoBuffer.Width; x++)
+                    {
+                        if(x - _positionX >= 0 && y - _positionY >= 0 && x - _positionX < _image.Width && y - _positionY < _image.Height)
+                        videoBuffer.setPixel(x, y, colorToRGB(_image.GetPixel(x - _positionX, y - _positionY)));
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -118,7 +142,9 @@ namespace iStringLite_Stuff.Effects
 
         private uint colorToRGB(Color color)
         {
-            return (uint) (color.R << 8 | color.G << 8 | color.B);
+            int rgb = color.B << 8 | color.G;
+            rgb = rgb << 8 | color.R;
+            return (uint) rgb;
         }
     }
 }

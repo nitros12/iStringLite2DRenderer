@@ -7,11 +7,15 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controller.cs" t="Include" />
         <e p="Effects" t="Include">
+          <e p="AnimatedGifEffect.cs" t="Include" />
           <e p="BitmapEffect.cs" t="Include" />
           <e p="BreathingEffect.cs" t="Include" />
           <e p="BrightnessEffect.cs" t="Include" />
           <e p="Effect.cs" t="Include" />
+          <e p="FillEffect.cs" t="Include" />
+          <e p="MovingTextureEffect.cs" t="Include" />
           <e p="RandomiseEffect.cs" t="Include" />
+          <e p="ScrollingFillEffect.cs" t="Include" />
           <e p="WaterEffect.cs" t="Include" />
         </e>
         <e p="Images" t="Include">

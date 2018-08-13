@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace iStringLite_2DRenderer
+﻿namespace iStringLite2DRenderer
 {
     /// <summary>
     /// A VideoBuffer class which stores all rendered pixel data.
@@ -10,7 +8,7 @@ namespace iStringLite_2DRenderer
     {
         public int Width { get; }                      // width of the VideoBuffer (should be at least 2x the width of the Scene)
         public int Height { get; }                     // height of the VideoBuffer (should be at least 2x the height of the Scene)
-        public uint[,] Buffer { get; private set; }    // 2D matrix of pixel data at size mentioned above
+        public uint[,] Buffer { get; set; }    // 2D matrix of pixel data at size mentioned above
 
 
         public VideoBuffer(int width, int height)
@@ -27,6 +25,30 @@ namespace iStringLite_2DRenderer
         public void update(uint[,] videoBuffer)
         {
             this.Buffer = videoBuffer;
+        }
+
+        /// <summary>
+        /// Sets a byte in the buffer to a specified colour.
+        /// Useful for ease of confusion in X and Y coordinates (Buffer[y, x]).
+        /// </summary>
+        /// <param name="x">Pixel's X coordinate to be set</param>
+        /// <param name="y">Pixel's Y coordinate to be set</param>
+        /// <param name="colour">The colour to set the pixel to</param>
+        public void setPixel(int x, int y, uint colour)
+        {
+            Buffer[y, x] = colour;
+        }
+
+        /// <summary>
+        /// Gets the pixel value stored in the Buffer at a specified X and Y coordinate.
+        /// Useful for ease of confusing in X and Y coordinates (Buffer[y, x]).
+        /// </summary>
+        /// <param name="x">Pixel's X coordinate to be returned</param>
+        /// <param name="y">Pixel's Y coordinate to be returned</param>
+        /// <returns>The colour of the pixel at the X and Y coordinates</returns>
+        public uint getPixel(int x, int y)
+        {
+            return Buffer[y, x];
         }
     }
 }
