@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
+using System.Xml.Linq;
 using iStringLite2DRenderer.Effects;
 
 namespace iStringLite2DRenderer
@@ -19,18 +20,11 @@ namespace iStringLite2DRenderer
         private UdpClient UdpClient;            // UDP client for communicating with the Routers
         private VideoBuffer VideoBuffer;        // an array of pixel values to be updated before sending to the LEDs
         private Stopwatch Timer;                // timer used to lock FPS
-
+        
         public static void Main(string[] args)
         {
             Renderer renderer = new Renderer("Scenes/Board.xml");
             renderer.Render();
-
-            /*Color color = Color.FromArgb(255, 0, 0);
-            Console.WriteLine(color);
-            color = ControlPaint.Dark(color, .1f);
-            Console.WriteLine(color);
-            color = ControlPaint.Light(color, .56f);
-            Console.WriteLine(color);*/
         }
         
         public Renderer(string sceneFileLocation)
@@ -42,15 +36,7 @@ namespace iStringLite2DRenderer
             this.Timer = new Stopwatch();
             this.Effects = new List<Effect>();
 
-            //TODO: Used for testing. This will load automatically
-
-            //AddEffect(new FillEffect(0, 0, 0));
-            //AddEffect(new AnimatedGifEffect("Images/vaporwave.gif", 0, 0, VideoBuffer)); //, true, VideoBuffer));
-            //AddEffect(new MovingTextureEffect("Images/water.png", -100, -100, 100, 100)); //, true, VideoBuffer));
-            //AddEffect(new RandomiseEffect(10));
-            AddEffect(new ScrollingFillEffect(255, 0, 0, 10));
-            //AddEffect(new BreathingEffect(0.001, 0.5, 0.001, 10));
-            AddEffect(new BrightnessEffect(0.01));
+            Utils.SoftLoadEffects(out Effects, VideoBuffer);
         }
         
         /// <summary>
@@ -98,11 +84,11 @@ namespace iStringLite2DRenderer
                     }
                     bufferOffset = 0;
                     r.sendCommand(c.Id, 255, 0x0C, c.DataBuffer); // sends the data buffer with the command 0x0C (24-bit command)
-                    Thread.Sleep(1);
+                    Thread.Sleep(1); //TODO: Improve this traffic shaping with a timer?
                 }
             }
         }
-
+        
         /// <summary>
         /// The main render loop that updates the video buffer (Effects) and updates all LightPoints with
         /// their new values.

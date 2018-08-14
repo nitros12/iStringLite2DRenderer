@@ -13,9 +13,9 @@
           <e p="BrightnessEffect.cs" t="Include" />
           <e p="Effect.cs" t="Include" />
           <e p="FillEffect.cs" t="Include" />
-          <e p="MovingTextureEffect.cs" t="Include" />
           <e p="RandomiseEffect.cs" t="Include" />
           <e p="ScrollingFillEffect.cs" t="Include" />
+          <e p="TextEffect.cs" t="Include" />
           <e p="WaterEffect.cs" t="Include" />
         </e>
         <e p="Images" t="Include">
@@ -36,6 +36,7 @@
           <e p="InfoLabSection.xml" t="Include" />
           <e p="Scene.xml" t="Include" />
         </e>
+        <e p="Utils.cs" t="Include" />
         <e p="VideoBuffer.cs" t="Include" />
       </e>
       <e p="iStringLite2DRenderer.sln" t="IncludeFlat" />

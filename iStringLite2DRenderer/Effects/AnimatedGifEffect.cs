@@ -53,7 +53,9 @@ namespace iStringLite2DRenderer.Effects
             // load current frame
             _gif.SelectActiveFrame(_frames, _frameIndex);
             _image = new Bitmap(_gif, new Size(_image.Width, _image.Height));
-            
+            /*_image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            _image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            _image.RotateFlip(RotateFlipType.Rotate90FlipNone);*/
             // increment frame
             _frameIndex++;
             if(_frameIndex >= _frameCount)
