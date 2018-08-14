@@ -10,6 +10,10 @@ namespace iStringLite2DRenderer.Effects
         protected int _positionX;
         protected int _positionY;
 
+        public BitmapEffect()
+        {
+        }
+        
         /// <summary>
         /// Used when creating a fullscreen, scaled bitmap that fills the entire VideoBuffer.
         /// </summary>
@@ -123,7 +127,8 @@ namespace iStringLite2DRenderer.Effects
                     for (int x = 0; x < videoBuffer.Width; x++)
                     {
                         if(x - _positionX >= 0 && y - _positionY >= 0 && x - _positionX < _image.Width && y - _positionY < _image.Height)
-                        videoBuffer.setPixel(x, y, colorToRGB(_image.GetPixel(x - _positionX, y - _positionY)));
+                            if(_image.GetPixel(x, y).A != 0) // dont render transparrent pixels
+                                videoBuffer.setPixel(x, y, colorToRGB(_image.GetPixel(x - _positionX, y - _positionY)));
                     }
                 }
             }

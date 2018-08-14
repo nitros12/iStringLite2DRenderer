@@ -15,6 +15,7 @@
           <e p="FillEffect.cs" t="Include" />
           <e p="RandomiseEffect.cs" t="Include" />
           <e p="ScrollingFillEffect.cs" t="Include" />
+          <e p="ScrollingTextEffect.cs" t="Include" />
           <e p="TextEffect.cs" t="Include" />
           <e p="WaterEffect.cs" t="Include" />
         </e>

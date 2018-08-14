@@ -113,5 +113,18 @@ namespace iStringLite2DRenderer
                     frame++;
             }
         }
+        
+        /// <summary>
+        /// Clears the display before exiting the application.
+        /// TODO: This currently doesn't work as the application is a console application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void OnProcessExit (object sender, EventArgs e)
+        {
+            Console.WriteLine ("Clearing display...");
+            Array.Clear(VideoBuffer.Buffer, 0, VideoBuffer.Buffer.Length); // zero out VideoBuffer
+            UpdateLightPoints(); // update the light points with zerod buffer
+        }
     }
 }

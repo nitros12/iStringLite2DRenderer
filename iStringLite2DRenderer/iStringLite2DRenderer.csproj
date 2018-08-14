@@ -51,6 +51,7 @@
     <Compile Include="Effects\FillEffect.cs" />
     <Compile Include="Effects\RandomiseEffect.cs" />
     <Compile Include="Effects\ScrollingFillEffect.cs" />
+    <Compile Include="Effects\ScrollingTextEffect.cs" />
     <Compile Include="Effects\TextEffect.cs" />
     <Compile Include="Effects\WaterEffect.cs" />
     <Compile Include="Utils.cs" />

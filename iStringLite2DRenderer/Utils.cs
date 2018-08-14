@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -22,16 +23,18 @@ namespace iStringLite2DRenderer
             effects = new List<Effect>();
             //TODO: Used for testing. This should use the XML file 
 
+            //effects.Add(new FillEffect(255, 0, 0)); // clear LEDs
+            effects.Add(new AnimatedGifEffect("Images/gif/rainbow2.gif", 0, 0, videoBuffer)); //50, 20, 20));
+            effects.Add(new ScrollingTextEffect("B  L  A  C  K  P  O  O  L    I  L  L  U  M  I  N  A  T  I  O  N  S", 0, -1, 6, 70, Brushes.Black, videoBuffer));
+            effects.Add(new BrightnessEffect(0.1));
             //effects.Add(new FillEffect(0, 0, 0)); // clear LEDs
             //effects.Add(new FillEffect(0, 40, 180));
-            //effects.Add(new AnimatedGifEffect("Images/gif/rainbow7.gif", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new WaterEffect(80, VideoBuffer));
             //effects.Add(new AnimatedGifEffect("Images/gif/water4.gif", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new BitmapEffect("Images/png/water.png", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new RandomiseEffect(10));
             //effects.Add(new ScrollingFillEffect(255, 0, 0, 10));
             //effects.Add(new BreathingEffect(0.001, 0.5, 0.001, 10));
-            //effects.Add(new BrightnessEffect(0.1));
         }
         
         /// <summary>
