@@ -23,10 +23,10 @@ namespace iStringLite2DRenderer
             effects = new List<Effect>();
             //TODO: Used for testing. This should use the XML file 
 
-            //effects.Add(new FillEffect(255, 0, 0)); // clear LEDs
-            effects.Add(new AnimatedGifEffect("Images/gif/rainbow2.gif", 0, 0, videoBuffer)); //50, 20, 20));
-            effects.Add(new ScrollingTextEffect("B  L  A  C  K  P  O  O  L    I  L  L  U  M  I  N  A  T  I  O  N  S", 0, -1, 6, 70, Brushes.Black, videoBuffer));
-            effects.Add(new BrightnessEffect(0.1));
+            effects.Add(new FillEffect(0, 0, 0));
+            //effects.Add(new AnimatedGifEffect("Images/gif/spaceinvaders.gif", 0, 0, videoBuffer)); //50, 20, 20));
+            //effects.Add(new ScrollingTextEffect("I N F O L A B 2 1", 40, -1, 30, 70, Brushes.Black, videoBuffer));
+            //effects.Add(new BrightnessEffect(0.1));
             //effects.Add(new FillEffect(0, 0, 0)); // clear LEDs
             //effects.Add(new FillEffect(0, 40, 180));
             //effects.Add(new WaterEffect(80, VideoBuffer));

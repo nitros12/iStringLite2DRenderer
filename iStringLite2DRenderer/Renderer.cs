@@ -23,7 +23,7 @@ namespace iStringLite2DRenderer
         
         public static void Main(string[] args)
         {
-            Renderer renderer = new Renderer("Scenes/Board.xml");
+            Renderer renderer = new Renderer("Scenes/InfoLab.xml");
             renderer.Render();
         }
         
@@ -84,7 +84,7 @@ namespace iStringLite2DRenderer
                     }
                     bufferOffset = 0;
                     r.sendCommand(c.Id, 255, 0x0C, c.DataBuffer); // sends the data buffer with the command 0x0C (24-bit command)
-                    Thread.Sleep(1); //TODO: Improve this traffic shaping with a timer?
+                    //Thread.Sleep(1); //TODO: Improve this traffic shaping with a timer?
                 }
             }
         }

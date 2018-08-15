@@ -46,24 +46,26 @@ namespace iStringLite2DRenderer.Effects
 
         public override void update(ref VideoBuffer videoBuffer)
         {
-            if (!intervalReached()) return;
-            
-            //Console.WriteLine("Frame: {0}/{1}", (_frameIndex + 1), _frameCount);
-            
-            // load current frame
-            _gif.SelectActiveFrame(_frames, _frameIndex);
-            _image = new Bitmap(_gif, new Size(_image.Width, _image.Height));
-            /*_image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            _image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            _image.RotateFlip(RotateFlipType.Rotate90FlipNone);*/
-            // increment frame
-            _frameIndex++;
-            if(_frameIndex >= _frameCount)
-                _frameIndex = 0;
-            
-            // have the BitmapEffect code render the frame
+            if (intervalReached())
+            {
+                //Console.WriteLine("Frame: {0}/{1}", (_frameIndex + 1), _frameCount);
+
+                // load current frame
+                _gif.SelectActiveFrame(_frames, _frameIndex);
+                _image = new Bitmap(_gif, new Size(_image.Width, _image.Height));
+                /*_image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                _image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                _image.RotateFlip(RotateFlipType.Rotate90FlipNone);*/
+                // increment frame
+                _frameIndex++;
+                if (_frameIndex >= _frameCount)
+                    _frameIndex = 0;
+
+                // have the BitmapEffect code render the frame
+                Timer.Restart();
+            }
+
             base.update(ref videoBuffer);
-            Timer.Restart();
         }
 
         public override void reset()
