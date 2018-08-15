@@ -22,6 +22,8 @@ namespace iStringLite2DRenderer
         private double MinY { get; set; }                            // min Y of scene
         private double MaxY { get; set; }                            // max Y of scene
 
+        public int MaxControllerCount { get; set; }
+
         private const int VIDEO_BUFFER_RESOLUTION = 1;               // the multiplier of the video buffer resolution
         public const string SCENE_ELEMENT = "Scene";                // XML tag for a Scene
         private const string CONTROLLER_ELEMENT = "FixedIPService";  // XML tag for a Router
@@ -108,6 +110,10 @@ namespace iStringLite2DRenderer
                         lightPoint.CaluclateProjectedCoordinates(MinX, MaxX, MinY, MaxY, this.VideoBufferWidth, this.VideoBufferHeight); // calculate the projected coordinates given the min and max of each
                     }
 
+                    // get max controller count for render loop
+                    if (Routers[routerCounter].Controllers.Count > MaxControllerCount)
+                        MaxControllerCount = Routers[routerCounter].Controllers.Count;
+                    
                     routerCounter++;
                 }
             }

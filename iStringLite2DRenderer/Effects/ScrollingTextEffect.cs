@@ -9,6 +9,12 @@ namespace iStringLite2DRenderer.Effects
             Interval = interval;
             play();
         }
+        
+        public ScrollingTextEffect(string text, int positionX, int positionY, int textSize, int interval, Brush colour, Brush shadow, VideoBuffer videoBuffer) : base(text, positionX, positionY, textSize, colour, shadow, videoBuffer)
+        {
+            Interval = interval;
+            play();
+        }
 
         public override void update(ref VideoBuffer videoBuffer)
         {

@@ -23,7 +23,7 @@ namespace iStringLite2DRenderer
         
         public static void Main(string[] args)
         {
-            Renderer renderer = new Renderer("Scenes/InfoLab.xml");
+            Renderer renderer = new Renderer("Scenes/EmulatedInfoLabSection.xml");
             renderer.Render();
         }
         
@@ -68,10 +68,20 @@ namespace iStringLite2DRenderer
         public void UpdateLightPoints()
         {
             int bufferOffset = 0;
-            foreach (Router r in Scene.Routers)
+            Router r;
+            Controller c;
+            
+            // loops through the routers and sequentially selects the next one in line (offset, nice for traffic shaping delays)
+            for (int cIndex = 0; cIndex < Scene.MaxControllerCount; cIndex++)
             {
-                foreach (Controller c in r.Controllers)
+                for (int rIndex = 0; rIndex < Scene.Routers.Length; rIndex++)
                 {
+                    if (Scene.Routers[rIndex].Controllers.Count <= cIndex) continue; // if unbalanced controller count per router, continue
+                    
+                    r = Scene.Routers[rIndex];
+                    c = (Controller) r.Controllers[cIndex];
+                    //Console.WriteLine("R: {0}, C: {1}", rIndex, cIndex);
+                    
                     foreach (LightPoint l in c.LightPoints)
                     {
                         // sets Controller data to VideoBuffer data
@@ -79,12 +89,11 @@ namespace iStringLite2DRenderer
                         
                         // copies bytes from VideoBuffer to PacketBuffer at an offset of the light * 3 (RGB)
                         Array.Copy(BitConverter.GetBytes(VideoBuffer.Buffer[l.Py, l.Px]), 0, c.DataBuffer, bufferOffset, 3);
-                        //Console.WriteLine("X: {0}, Y: {1}", l.Px, l.Py);
                         bufferOffset += 3; // increment by 3 (R, G, B)
                     }
+                    
                     bufferOffset = 0;
                     r.sendCommand(c.Id, 255, 0x0C, c.DataBuffer); // sends the data buffer with the command 0x0C (24-bit command)
-                    //Thread.Sleep(1); //TODO: Improve this traffic shaping with a timer?
                 }
             }
         }

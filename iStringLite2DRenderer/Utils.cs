@@ -24,12 +24,14 @@ namespace iStringLite2DRenderer
             //TODO: Used for testing. This should use the XML file 
 
             effects.Add(new FillEffect(0, 0, 0));
-            //effects.Add(new AnimatedGifEffect("Images/gif/spaceinvaders.gif", 0, 0, videoBuffer)); //50, 20, 20));
-            //effects.Add(new ScrollingTextEffect("I N F O L A B 2 1", 40, -1, 30, 70, Brushes.Black, videoBuffer));
+            //effects.Add(new AnimatedGifEffect("Images/gif/rainbow3.gif", 0, 0, videoBuffer));
+            effects.Add(new AnimatedGifEffect("Images/gif/water3.gif", 0, 0, videoBuffer));
+            //effects.Add(new ScrollingTextEffect("BLACKPOOL ILLUMINATIONS", 10, -1, 22, 70, Brushes.Black, videoBuffer));
+            effects.Add(new ScrollingTextEffect("BLACKPOOL ILLUMINATIONS", 10, 25, 20, 30, Brushes.Crimson, Brushes.Black, videoBuffer));
             //effects.Add(new BrightnessEffect(0.1));
             //effects.Add(new FillEffect(0, 0, 0)); // clear LEDs
             //effects.Add(new FillEffect(0, 40, 180));
-            //effects.Add(new WaterEffect(80, VideoBuffer));
+            //effects.Add(new WaterEffect(80, videoBuffer));
             //effects.Add(new AnimatedGifEffect("Images/gif/water4.gif", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new BitmapEffect("Images/png/water.png", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new RandomiseEffect(10));
