@@ -21,22 +21,22 @@ namespace iStringLite2DRenderer
         public static void SoftLoadEffects(out List<Effect> effects, VideoBuffer videoBuffer)
         {
             effects = new List<Effect>();
-            //TODO: Used for testing. This should use the XML file 
+            //TODO: Used for testing. This should use the XML file
 
-            effects.Add(new FillEffect(0, 0, 0));
-            //effects.Add(new AnimatedGifEffect("Images/gif/rainbow3.gif", 0, 0, videoBuffer));
-            effects.Add(new AnimatedGifEffect("Images/gif/water3.gif", 0, 0, videoBuffer));
-            //effects.Add(new ScrollingTextEffect("BLACKPOOL ILLUMINATIONS", 10, -1, 22, 70, Brushes.Black, videoBuffer));
-            effects.Add(new ScrollingTextEffect("BLACKPOOL ILLUMINATIONS", 10, 25, 20, 30, Brushes.Crimson, Brushes.Black, videoBuffer));
+            //effects.Add(new FillEffect(0, 0, 0));
+            effects.Add(new AnimatedGifEffect("Images/gif/rainbow9.gif", 0, 0, videoBuffer));
+            //effects.Add(new WaterWhitesEffect(255, 255, 255));
+            
+            //effects.Add(new FillEffect(0, 40, 180));
+            //effects.Add(new ScrollingTextEffect("BLACKPOOL ILLUMINATIONS", 0, 0, 22, 70, Brushes.Red, Brushes.Black, videoBuffer));
             //effects.Add(new BrightnessEffect(0.1));
             //effects.Add(new FillEffect(0, 0, 0)); // clear LEDs
-            //effects.Add(new FillEffect(0, 40, 180));
             //effects.Add(new WaterEffect(80, videoBuffer));
             //effects.Add(new AnimatedGifEffect("Images/gif/water4.gif", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new BitmapEffect("Images/png/water.png", 0, 0, videoBuffer)); //50, 20, 20));
-            //effects.Add(new RandomiseEffect(10));
+            //effects.Add(new RandomiseEffect(1000));
             //effects.Add(new ScrollingFillEffect(255, 0, 0, 10));
-            //effects.Add(new BreathingEffect(0.001, 0.5, 0.001, 10));
+            //effects.Add(new BreathingEffect(0.001, 0.5, 0.01, 10));
         }
         
         /// <summary>

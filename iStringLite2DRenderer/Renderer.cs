@@ -13,7 +13,7 @@ namespace iStringLite2DRenderer
     /// </summary>
     public class Renderer
     {
-        public static readonly int FPS = 24;    // Frames per second to be rendered
+        public static readonly int FPS = 15;    // Frames per second to be rendered
         
         private Scene Scene;                    // loaded from an XML file using the iStringLite Scene format
         private List<Effect> Effects;           // a list of Effects to be rendered to the LEDs
@@ -23,7 +23,8 @@ namespace iStringLite2DRenderer
         
         public static void Main(string[] args)
         {
-            Renderer renderer = new Renderer("Scenes/EmulatedInfoLabSection.xml");
+            Renderer renderer = new Renderer("Scenes/LightWave.xml");
+            
             renderer.Render();
         }
         
@@ -76,24 +77,25 @@ namespace iStringLite2DRenderer
             {
                 for (int rIndex = 0; rIndex < Scene.Routers.Length; rIndex++)
                 {
-                    if (Scene.Routers[rIndex].Controllers.Count <= cIndex) continue; // if unbalanced controller count per router, continue
-                    
-                    r = Scene.Routers[rIndex];
-                    c = (Controller) r.Controllers[cIndex];
-                    //Console.WriteLine("R: {0}, C: {1}", rIndex, cIndex);
-                    
-                    foreach (LightPoint l in c.LightPoints)
+                    if (Scene.Routers[rIndex].Controllers.Count > cIndex) // if unbalanced controller count per router, continue
                     {
-                        // sets Controller data to VideoBuffer data
-                        //l.data = VideoBuffer.Buffer[l.Py, l.Px]; //TODO: l.data would be a pointer to the DataBuffer section
-                        
-                        // copies bytes from VideoBuffer to PacketBuffer at an offset of the light * 3 (RGB)
-                        Array.Copy(BitConverter.GetBytes(VideoBuffer.Buffer[l.Py, l.Px]), 0, c.DataBuffer, bufferOffset, 3);
-                        bufferOffset += 3; // increment by 3 (R, G, B)
+                        r = Scene.Routers[rIndex];
+                        c = (Controller) r.Controllers[cIndex];
+                        //Console.WriteLine("R: {0}, C: {1}", rIndex, cIndex);
+
+                        foreach (LightPoint l in c.LightPoints)
+                        {
+                            // sets Controller data to VideoBuffer data
+                            //l.data = VideoBuffer.Buffer[l.Py, l.Px]; //TODO: l.data would be a pointer to the DataBuffer section
+
+                            // copies bytes from VideoBuffer to PacketBuffer at an offset of the light * 3 (RGB)
+                            Array.Copy(BitConverter.GetBytes(VideoBuffer.Buffer[l.Py, l.Px]), 0, c.DataBuffer, bufferOffset, 3);
+                            bufferOffset += 3; // increment by 3 (R, G, B)
+                        }
+
+                        bufferOffset = 0;
+                        r.sendCommand(c.Id, 255, 0x0C, c.DataBuffer); // sends the data buffer with the command 0x0C (24-bit command)
                     }
-                    
-                    bufferOffset = 0;
-                    r.sendCommand(c.Id, 255, 0x0C, c.DataBuffer); // sends the data buffer with the command 0x0C (24-bit command)
                 }
             }
         }
@@ -108,6 +110,7 @@ namespace iStringLite2DRenderer
             int frame = 1;
             while (true)
             {
+                //TODO: 
                 if (Timer.ElapsedMilliseconds <= 1000 / FPS) continue; // skip while loop if not ready to update
                 UpdateVideoBuffer();
                 UpdateLightPoints();

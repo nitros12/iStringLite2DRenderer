@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<Scene xmlns="urn:firefly:scene">
+    <FixedIPService name="MK_ROUTER_1._firefly._udp.local" hostname="127.0.0.1" port="51966">
+        <Light id="257" x="0" y="0" z="0" />
+        <Light id="258" x="1" y="0" z="0" />
+        <Light id="259" x="2" y="0" z="0" />
+        <Light id="260" x="3" y="0" z="0" />
+        <Light id="261" x="4" y="0" z="0" />
+        <Light id="262" x="5" y="0" z="0" />
+        <Light id="263" x="6" y="0" z="0" />
+        <Light id="264" x="7" y="0" z="0" />
+        <Light id="265" x="8" y="0" z="0" />
+        <Light id="266" x="9" y="0" z="0" />
+        
+        <Light id="267" x="9" y="1" z="0" />
+        <Light id="268" x="8" y="1" z="0" />
+        <Light id="269" x="7" y="1" z="0" />
+        <Light id="270" x="6" y="1" z="0" />
+        <Light id="271" x="5" y="1" z="0" />
+        <Light id="272" x="3" y="1" z="0" />
+        <Light id="273" x="4" y="1" z="0" />
+        <Light id="274" x="2" y="1" z="0" />
+        <Light id="275" x="1" y="1" z="0" />
+        <Light id="276" x="0" y="1" z="0" />
+
+        <Light id="277" x="0" y="2" z="0" />
+        <Light id="278" x="1" y="2" z="0" />
+        <Light id="279" x="2" y="2" z="0" />
+        <Light id="280" x="3" y="2" z="0" />
+        <Light id="281" x="4" y="2" z="0" />
+        <Light id="282" x="5" y="2" z="0" />
+        <Light id="283" x="6" y="2" z="0" />
+        <Light id="284" x="7" y="2" z="0" />
+        <Light id="285" x="8" y="2" z="0" />
+        <Light id="286" x="9" y="2" z="0" />
+
+        <Light id="287" x="9" y="3" z="0" />
+        <Light id="288" x="8" y="3" z="0" />
+        <Light id="289" x="7" y="3" z="0" />
+        <Light id="290" x="6" y="3" z="0" />
+        <Light id="291" x="5" y="3" z="0" />
+        <Light id="292" x="4" y="3" z="0" />
+        <Light id="293" x="3" y="3" z="0" />
+        <Light id="294" x="2" y="3" z="0" />
+        <Light id="295" x="1" y="3" z="0" />
+        <Light id="296" x="0" y="3" z="0" />
+
+        <Light id="297" x="0" y="4" z="0" />
+        <Light id="298" x="1" y="4" z="0" />
+        <Light id="299" x="2" y="4" z="0" />
+        <Light id="300" x="3" y="4" z="0" />
+        <Light id="301" x="4" y="4" z="0" />
+        <Light id="302" x="5" y="4" z="0" />
+        <Light id="303" x="6" y="4" z="0" />
+        <Light id="304" x="7" y="4" z="0" />
+        <Light id="305" x="8" y="4" z="0" />
+        <Light id="306" x="9" y="4" z="0" />
+
+        <Light id="307" x="9" y="5" z="0" />
+        <Light id="308" x="8" y="5" z="0" />
+        <Light id="309" x="7" y="5" z="0" />
+        <Light id="310" x="6" y="5" z="0" />
+        <Light id="311" x="5" y="5" z="0" />
+        <Light id="312" x="4" y="5" z="0" />
+        <Light id="313" x="3" y="5" z="0" />
+        <Light id="314" x="2" y="5" z="0" />
+        <Light id="315" x="1" y="5" z="0" />
+        <Light id="316" x="0" y="5" z="0" />
+
+        <Light id="317" x="0" y="6" z="0" />
+        <Light id="318" x="1" y="6" z="0" />
+        <Light id="319" x="2" y="6" z="0" />
+        <Light id="320" x="3" y="6" z="0" />
+        <Light id="321" x="4" y="6" z="0" />
+        <Light id="322" x="5" y="6" z="0" />
+        <Light id="323" x="6" y="6" z="0" />
+        <Light id="324" x="7" y="6" z="0" />
+        <Light id="325" x="8" y="6" z="0" />
+        <Light id="326" x="9" y="6" z="0" />
+
+        <Light id="327" x="9" y="7" z="0" />
+        <Light id="328" x="8" y="7" z="0" />
+        <Light id="329" x="7" y="7" z="0" />
+        <Light id="330" x="6" y="7" z="0" />
+        <Light id="331" x="5" y="7" z="0" />
+        <Light id="332" x="4" y="7" z="0" />
+        <Light id="333" x="3" y="7" z="0" />
+        <Light id="334" x="2" y="7" z="0" />
+        <Light id="335" x="1" y="7" z="0" />
+        <Light id="336" x="0" y="7" z="0" />
+    </FixedIPService>
+</Scene>

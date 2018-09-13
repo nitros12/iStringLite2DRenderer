@@ -47,6 +47,7 @@
     <Compile Include="Effects\BitmapEffect.cs" />
     <Compile Include="Effects\BreathingEffect.cs" />
     <Compile Include="Effects\BrightnessEffect.cs" />
+    <Compile Include="Effects\DynamicSurfboardEffect.cs" />
     <Compile Include="Effects\Effect.cs" />
     <Compile Include="Effects\FillEffect.cs" />
     <Compile Include="Effects\RandomiseEffect.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Effects\ScrollingTextEffect.cs" />
     <Compile Include="Effects\TextEffect.cs" />
     <Compile Include="Effects\WaterEffect.cs" />
+    <Compile Include="Effects\WaterWhitesEffect.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="LightPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,6 @@
+C:\Users\admin\Desktop\Working Dir\BPL\iStringLite2DRenderer\iStringLite2DRenderer\bin\Debug\iStringLite2DRenderer.exe
+C:\Users\admin\Desktop\Working Dir\BPL\iStringLite2DRenderer\iStringLite2DRenderer\bin\Debug\iStringLite2DRenderer.pdb
+C:\Users\admin\Desktop\Working Dir\BPL\iStringLite2DRenderer\iStringLite2DRenderer\obj\Debug\iStringLite2DRenderer.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\Working Dir\BPL\iStringLite2DRenderer\iStringLite2DRenderer\obj\Debug\iStringLite2DRenderer.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Working Dir\BPL\iStringLite2DRenderer\iStringLite2DRenderer\obj\Debug\iStringLite2DRenderer.exe
+C:\Users\admin\Desktop\Working Dir\BPL\iStringLite2DRenderer\iStringLite2DRenderer\obj\Debug\iStringLite2DRenderer.pdb

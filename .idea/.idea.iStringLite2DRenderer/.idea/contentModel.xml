@@ -11,6 +11,7 @@
           <e p="BitmapEffect.cs" t="Include" />
           <e p="BreathingEffect.cs" t="Include" />
           <e p="BrightnessEffect.cs" t="Include" />
+          <e p="DynamicSurfboardEffect.cs" t="Include" />
           <e p="Effect.cs" t="Include" />
           <e p="FillEffect.cs" t="Include" />
           <e p="RandomiseEffect.cs" t="Include" />
@@ -18,6 +19,7 @@
           <e p="ScrollingTextEffect.cs" t="Include" />
           <e p="TextEffect.cs" t="Include" />
           <e p="WaterEffect.cs" t="Include" />
+          <e p="WaterWhitesEffect.cs" t="Include" />
         </e>
         <e p="Images" t="Include">
           <e p="heart.bmp" t="Include" />
