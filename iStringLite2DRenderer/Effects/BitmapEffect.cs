@@ -77,7 +77,7 @@ namespace iStringLite2DRenderer.Effects
             }
             catch (Exception e)
             {
-                Console.WriteLine("Image could not be loaded from {0}", imageLocation);
+                Console.WriteLine("Image could not be loaded from {0}, {1}", imageLocation, e);
             }
         }
 

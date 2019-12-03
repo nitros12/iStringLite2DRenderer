@@ -23,7 +23,7 @@ namespace iStringLite2DRenderer
         
         public static void Main(string[] args)
         {
-            Renderer renderer = new Renderer("Scenes/LightWave.xml");
+            Renderer renderer = new Renderer("/src/iStringLite2DRenderer/Scenes/InfoLab.xml");
             
             renderer.Render();
         }
