@@ -33,7 +33,8 @@ namespace iStringLite2DRenderer
             //effects.Add(new FillEffect(0, 0, 0)); // clear LEDs
             //effects.Add(new WaterEffect(80, videoBuffer));
             //effects.Add(new AnimatedGifEffect("Images/gif/water4.gif", 0, 0, videoBuffer)); //50, 20, 20));
-            effects.Add(new BitmapEffect("/src/duck.png", 0, 0, videoBuffer)); //50, 20, 20));
+            effects.Add(new RemoteEffect("/tmp/lol/bmp"));
+            // effects.Add(new BitmapEffect("/src/duck.png", 0, 0, videoBuffer)); //50, 20, 20));
             //effects.Add(new RandomiseEffect(1000));
             //effects.Add(new ScrollingFillEffect(255, 0, 0, 10));
             //effects.Add(new BreathingEffect(0.001, 0.5, 0.01, 10));

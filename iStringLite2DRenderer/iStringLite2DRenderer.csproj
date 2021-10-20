@@ -49,6 +49,7 @@
     <Compile Include="Effects\BrightnessEffect.cs" />
     <Compile Include="Effects\DynamicSurfboardEffect.cs" />
     <Compile Include="Effects\Effect.cs" />
+    <Compile Include="Effects\RemoteEffect.cs" />
     <Compile Include="Effects\FillEffect.cs" />
     <Compile Include="Effects\RandomiseEffect.cs" />
     <Compile Include="Effects\ScrollingFillEffect.cs" />
